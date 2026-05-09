@@ -37,3 +37,6 @@ disableKinds = ["taxonomy", "term", "section"]
         "UK",
         "Belgrade",
       ]
+
+[services.googleAnalytics]
+  id = 'G-NDG4V5WZCK'

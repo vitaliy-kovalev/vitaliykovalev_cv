@@ -27,6 +27,8 @@
     {{ end }}
 
     {{- partial "tags_css.html" . -}}
+
+    {{ template "_internal/google_analytics.html" . }}
   </head>
   <body>
     <div class="page">
