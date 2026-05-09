@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html
+  lang="{{ with .Site.Params.isoCode | default (.Site.LanguageCode | default "en") }}
+    {{- . -}}
+  {{ end }}"
+>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {{ with site.Params.htmlCode | default .Site.LanguageCode }}
+      <meta http-equiv="content-language" content="{{ . }}" />
+    {{ end }}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ site.Params.author }}</title>
+
+    {{ $data := index site.Data site.Language.Lang }}
+    <meta name="description" content="{{ site.Params.author }} CV">
+    <meta name="author" content="{{ site.Params.author }}" />
+    <meta name="keywords" content="{{ range site.Params.keywords }}{{ . }} {{ end }}{{ with $data.keywords }}{{ range $key, $value := . }}{{ range $value }}{{ . }} {{ end }}{{ end }}{{ end }}">
+    <meta name="robots" content="index, follow">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    {{ if isset site.Params "favicon" }}
+    <link rel="icon" href="/{{ site.Params.favicon }}" />
+    {{ end }}
+
+    {{- partial "tags_css.html" . -}}
+  </head>
+  <body>
+    <div class="page">
+      <div class="container">
+        {{ if eq hugo.Environment "dev" }}
+          <hr class="marker" />
+        {{ end }}
+        {{- partial "header.html" . -}}
+        {{ block "main" . }}
+        {{ end }}
+        {{- partial "footer.html" . -}}
+      </div>
+    </div>
+  </body>
+</html>

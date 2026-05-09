@@ -1,0 +1,13 @@
+{{ $data := index site.Data site.Language.Lang }}
+{{ with $data.content }}
+<footer>
+  <section>
+    {{ if (fileExists "static/cv.pdf") }}
+      <a target="_blank" href="/cv.pdf" id="print">Download PDF</a>
+    {{ end }}
+  </section>
+  <section class="copyright">
+    <span>Copyright © {{ now.Format "2006" }} {{ delimit .name " " }}. All rights reserved.</span>
+  </section>
+</footer>
+{{ end }}

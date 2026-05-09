@@ -1,0 +1,343 @@
+/* CONSTANTS */
+
+$black: #000;
+$gray: #888;
+$white: #fff;
+$phone: 450px;
+$tablet: 768px;
+$desktop: 1024px;
+
+/* PAGE PARAMS */
+
+$paper: A4;
+$paper_margin: 0.5in;
+$print_margin: 0.25in;
+$paper_width: if($paper==A4, 210mm, 8.5in) + ($paper_margin - $print_margin) * 2;
+$paper_height: if($paper==A4, 297mm, 11in);
+
+/* STYLES */
+
+$font_size: 10pt;
+$section_spacing: 0.5rem;
+$sub_section_spacing: 0.5rem;
+
+html {
+  font-family: "Georgia", serif;
+  font-size: $font_size;
+}
+
+h1,
+h3 {
+  font-weight: 700;
+}
+
+h2,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 0.25rem;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: 1rem;
+}
+
+h2 {
+  text-transform: uppercase;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+a {
+  color: $black;
+}
+
+ul {
+  margin: 0;
+  padding-inline-start: 1rem;
+  list-style-type: disc;
+}
+
+span {
+  display: inline-block;
+}
+
+.keywords {
+  color: white;
+  font-size: 0.1px;
+  position: absolute;
+}
+
+.container {
+  margin: $paper_margin;
+}
+
+header {
+  * {
+    justify-content: center;
+    text-align: center;
+  }
+
+  address {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+    font-style: normal;
+    line-height: 2rem;
+  }
+
+  h3 {
+    font-weight: unset;
+    font-style: italic;
+  }
+
+  a {
+    --size: 1rem;
+    font-size: var(--size);
+    text-decoration: none;
+    width: 100%;
+
+    svg {
+      height: calc(var(--size) * 1.5);
+      width: calc(var(--size) * 1.5);
+      vertical-align: middle;
+      margin-right: 0.25rem;
+    }
+  }
+}
+
+main {
+  display: grid;
+  grid-template-columns: [left] 1fr [middle] 1fr [right];
+  grid-auto-flow: row;
+
+  > section {
+    margin-top: $section_spacing;
+    grid-column: 1 / span 2;
+    display: inline-block;
+
+    hr {
+      border: 1px solid $black;
+      margin-block: 0.1rem;
+    }
+
+    section:not(:first-of-type) {
+      margin-top: $sub_section_spacing;
+    }
+  }
+
+  .grid {
+    display: grid;
+
+    .details {
+      grid-column: 2;
+    }
+  }
+}
+
+.marker {
+  position: absolute;
+  box-sizing: border-box;
+  border: 1px solid red;
+  top: calc(#{$paper_height} - #{$print_margin});
+  width: calc(#{$paper_width} - #{$paper_margin} * 2);
+}
+
+footer {
+  margin-top: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: $gray;
+  text-align: center;
+
+  section {
+    margin-bottom: 0.5rem;
+  }
+
+  .icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem 3rem;
+    flex-wrap: wrap;
+
+    a {
+      font-size: 2rem;
+      text-decoration: none;
+    }
+  }
+
+  .langs {
+    a {
+      display: inline-block;
+    }
+
+    a + a {
+      display: inline-block;
+      border-left: 2px solid $black;
+      margin-left: 0.5rem;
+      padding-left: 0.5rem;
+    }
+  }
+}
+
+/**
+
+A4 PRINTED
+
+*/
+
+@media print {
+  @page {
+    size: $paper portrait;
+    margin: $print_margin;
+  }
+
+  header {
+    a {
+      width: unset;
+    }
+  }
+
+  .container {
+    margin: 0;
+  }
+
+  .marker {
+    top: calc(-#{$paper_height} - 1in);
+    color: transparent;
+  }
+
+  main {
+    div.heading {
+      display: flex;
+      justify-content: space-between;
+
+      div:nth-last-child(1) {
+        text-align: right;
+        flex: 0 0 30%;
+      }
+    }
+
+    section.half {
+      grid-column: unset;
+    }
+
+    .grid {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  footer {
+    display: none;
+  }
+}
+
+/**
+
+PHONE
+
+*/
+
+@media screen and (min-width: $phone) {
+  div.heading {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+
+    div:nth-last-child(1) {
+      text-align: right;
+      flex: 0 0 30%;
+    }
+  }
+
+  .grid {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  footer {
+    .icons {
+      gap: 1rem;
+    }
+  }
+}
+
+/**
+
+TABLET
+
+*/
+
+@media screen and (min-width: $tablet) {
+  main > section.half {
+    grid-column: unset;
+  }
+}
+
+/**
+
+DESKTOP
+
+*/
+
+@media screen and (min-width: $desktop) {
+  body {
+    padding: 3rem;
+  }
+
+  header {
+    a {
+      width: unset;
+    }
+  }
+
+  .page {
+    width: $paper_width;
+    margin: auto;
+    background-color: $white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+    border: 0.1px solid transparent;
+    position: relative;
+
+    &::before,
+    &::after {
+      background: transparent;
+      bottom: 1rem;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      content: " ";
+      height: 10px;
+      position: absolute;
+      width: 40%;
+      z-index: -1;
+    }
+
+    &::before {
+      left: 12px;
+      transform: skew(-5deg) rotate(-5deg);
+    }
+
+    &::after {
+      right: 12px;
+      transform: skew(5deg) rotate(5deg);
+    }
+  }
+}

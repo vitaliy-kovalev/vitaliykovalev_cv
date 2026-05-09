@@ -1,0 +1,39 @@
+baseURL = "https://cv.vitaliykovalev.com/"
+defaultContentLanguage = "en"
+publishDir = "public"
+disableKinds = ["taxonomy", "term", "section"]
+
+[params]
+  favicon = "favicon.ico"
+  redirectPrint = true
+  renderKeywords = true
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+    [languages.en.params]
+      author = "Vitaliy Kovalev"
+      keywords = [
+        "Vitaliy",
+        "Kovalev",
+        "CV",
+        "Resume",
+        "Curriculum Vitae",
+        "BI",
+        "Analytics Engineering",
+        "Data",
+        "Head of BI",
+        "Analytics Engineering Lead",
+        "BI Platform Lead",
+        "Self-serve analytics",
+        "Enterprise reporting",
+        "LLM",
+        "RAG",
+        "ClickHouse",
+        "Tableau",
+        "Data quality",
+        "United Kingdom",
+        "UK",
+        "Belgrade",
+      ]

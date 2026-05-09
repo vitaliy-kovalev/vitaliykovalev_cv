@@ -1,0 +1,38 @@
+{{ define "main" }}
+<main>
+  {{ $data := index site.Data site.Language.Lang }}
+  {{ range $data.content.info }}
+  <section {{- if .half }} class="half"{{- end -}}>
+    <hr>
+    <h2>{{ .name | markdownify }}</h2>
+    {{ if site.Params.renderKeywords }}
+      {{ with .keyword }}
+        {{ $keywords := index $data.keywords . }}
+        <small class="keywords">{{ range $keywords }}{{ . }} {{ end }}</small>
+      {{ end }}
+    {{ end }}
+    {{ range .sections}}
+      <section>
+        {{ if and .title .date }}
+          <div class="heading">
+            {{ partial "heading.html" . }}
+            {{ partial "duration_location.html" . }}
+          </div>
+        {{ else }}
+          {{ partial "heading.html" . }}
+        {{ end }}
+        {{ if .grid }}
+          {{ with .points }}
+            {{ partial "grid.html" . }}
+          {{ end }}
+        {{ else }}
+          {{ with .points }}
+            {{ partial "bullet_points.html" . }}
+          {{ end }}
+        {{ end }}
+      </section>
+    {{ end }}
+  </section>
+  {{ end }}
+</main>
+{{ end }}

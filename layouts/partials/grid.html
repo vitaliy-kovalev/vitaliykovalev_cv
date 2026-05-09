@@ -1,0 +1,6 @@
+<div class="grid">
+  {{ range . }}
+    <p class="name">{{ .name | markdownify }}</p>
+    <p class="details">{{ .details | markdownify }}</p>
+  {{ end }}
+</div>

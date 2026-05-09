@@ -1,0 +1,11 @@
+{{ if or .date .location }}
+<div>
+  {{ with .location }}
+  <p>{{ . }}</p>
+  {{ end }}
+  <p>
+    {{ with .date }}<time>{{ . }}</time>{{ end }}
+    {{ with .enddate }} – <time>{{ . }}</time>{{ end }}
+  </p>
+</div>
+{{ end }}

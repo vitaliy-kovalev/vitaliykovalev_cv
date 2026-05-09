@@ -1,0 +1,6 @@
+<div>
+  <h3>{{ .title | markdownify }}</h3>
+  {{ range .subheadings }}
+  <p>{{ . | markdownify }}</p>
+  {{ end }}
+</div>
